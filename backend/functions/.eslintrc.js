@@ -1,33 +1,24 @@
 module.exports = {
   root: true,
-  env: {
-    es6: true,
-    node: true,
-  },
+  env: { es6: true, node: true },
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'import', 'prettier'],
   extends: [
-    "eslint:recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings",
-    "plugin:import/typescript",
-    "google",
-    "plugin:@typescript-eslint/recommended",
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:import/typescript',
+    'plugin:prettier/recommended',
   ],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: ["tsconfig.json", "tsconfig.dev.json"],
-    sourceType: "module",
+  settings: {
+    'import/resolver': {
+      node: true, // hace que eslint-plugin-import lea ts/paths
+    },
   },
-  ignorePatterns: [
-    "/lib/**/*", // Ignore built files.
-    "/generated/**/*", // Ignore generated files.
-  ],
-  plugins: [
-    "@typescript-eslint",
-    "import",
-  ],
   rules: {
-    "quotes": ["error", "double"],
-    "import/no-unresolved": 0,
-    "indent": ["error", 2],
+    'import/order': ['error', { 'newlines-between': 'always' }],
+    'import/no-unresolved': 'off', // apagamos el falso positivo
   },
+  ignorePatterns: ['/lib/**', '/generated/**'],
 };
